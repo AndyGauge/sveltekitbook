@@ -1,0 +1,24 @@
+{
+  "name": "sveltekitbook",
+  "version": "0.1.0",
+  "description": "Runtime helpers for SvelteKit books scaffolded by create-sveltekitbook.",
+  "type": "module",
+  "author": "Andrew Gauger",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndyGauge/sveltekitbook.git"
+  },
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./gestures": "./src/gestures.js",
+    "./md": "./src/md.js",
+    "./palette": "./src/palette.js",
+    "./Giscus.svelte": "./src/Giscus.svelte"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  }
+}
