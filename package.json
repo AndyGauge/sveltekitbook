@@ -1,6 +1,6 @@
 {
   "name": "sveltekitbook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Runtime helpers for SvelteKit books scaffolded by create-sveltekitbook.",
   "type": "module",
   "author": "Andrew Gauger",
