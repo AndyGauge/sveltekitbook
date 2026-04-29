@@ -22,6 +22,7 @@ shared and stable:
 | `sveltekitbook/md` | `md(text, { glossary, glossaryBase })` — inline `**bold**`, `*em*`, `[[term]]` → glossary link. |
 | `sveltekitbook/palette` | `makeSpectrum({ ramp, inverted })` → `{ paletteFor, styleFor, modeFor }` for spectrum books. |
 | `sveltekitbook/Giscus.svelte` | Giscus comments mounted by props (`repo`, `repoId`, `category`, `categoryId`, `term`, `mode`). |
+| `sveltekitbook/PageMeta.svelte` | Drops Open Graph + Twitter Card tags into `<svelte:head>` so per-page URLs unfurl with a tldr in Slack/iMessage/Discord. Props: `title`, `description`, `url`, `siteName`, `image`, `imageAlt`, `type`, `twitterCard`. |
 
 Consumed directly by projects generated via `npm create sveltekitbook`.
 You usually don't install it by hand.
