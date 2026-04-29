@@ -6,6 +6,14 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-04-29
+
+### Added
+- `sveltekitbook/PageMeta.svelte` — drops Open Graph + Twitter Card
+  meta tags into `<svelte:head>` so per-page URLs unfurl with a tldr
+  in Slack / iMessage / Discord. Props: `title`, `description`, `url`,
+  `siteName`, `image`, `imageAlt`, `type`, `twitterCard`.
+
 ## [0.1.1] — 2026-04-25
 
 ### Fixed
