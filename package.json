@@ -16,7 +16,8 @@
     "./gestures": "./src/gestures.js",
     "./md": "./src/md.js",
     "./palette": "./src/palette.js",
-    "./Giscus.svelte": "./src/Giscus.svelte"
+    "./Giscus.svelte": "./src/Giscus.svelte",
+    "./PageMeta.svelte": "./src/PageMeta.svelte"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"
