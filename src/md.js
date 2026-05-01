@@ -64,4 +64,29 @@ export function md(text, opts = {}) {
   return out;
 }
 
+/**
+ * Render trusted block-level markdown — paragraphs only.
+ *
+ * Splits `text` on blank lines (one or more `\n\n`) and emits one `<p>` per
+ * paragraph, with inline transforms (`md`) applied per paragraph. Use this
+ * for any field that may contain multiple paragraphs (section bodies, ELI5
+ * blocks, chapter intros) and render the result inside a `<div>` wrapper.
+ *
+ * Do NOT wrap the output in a `<p>` — that produces nested `<p>` tags, which
+ * the browser auto-closes, collapsing every paragraph into one block.
+ *
+ * @param {string} text
+ * @param {{ glossary?: Record<string, unknown>, glossaryBase?: string }} [opts]
+ * @returns {string} HTML string of `<p>...</p>` paragraphs joined together.
+ */
+export function mdBlock(text, opts = {}) {
+  if (!text) return '';
+  return String(text)
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p>${md(p, opts)}</p>`)
+    .join('');
+}
+
 export { slug };

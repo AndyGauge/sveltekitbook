@@ -6,6 +6,16 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-05-01
+
+### Added
+- `mdBlock(text, opts)` exported from `sveltekitbook/md` — paragraph-aware
+  block renderer. Splits trusted markdown text on blank lines and emits
+  one `<p>` per paragraph with `md()` applied for inline transforms. Use
+  this for any field that may contain multiple paragraphs (section bodies,
+  ELI5 blocks, chapter intros) and render the result inside a `<div>`
+  wrapper — never inside a `<p>`, which collapses paragraphs into one block.
+
 ## [0.2.0] — 2026-04-29
 
 ### Added
