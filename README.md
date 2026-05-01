@@ -19,7 +19,7 @@ shared and stable:
 | Export | What it is |
 | ------ | ---------- |
 | `sveltekitbook/gestures` | `createPager({ onNext, onPrev, setOffset })` — wheel + touch-drag → page nav. |
-| `sveltekitbook/md` | `md(text, { glossary, glossaryBase })` — inline `**bold**`, `*em*`, `[[term]]` → glossary link. |
+| `sveltekitbook/md` | `md(text, { glossary, glossaryBase })` — inline `**bold**`, `*em*`, `[[term]]` → glossary link. Also exports `mdBlock(text, opts)` — paragraph-aware variant that splits on blank lines and emits `<p>` per paragraph. Render inside a `<div>` wrapper, never `<p>`. |
 | `sveltekitbook/palette` | `makeSpectrum({ ramp, inverted })` → `{ paletteFor, styleFor, modeFor }` for spectrum books. |
 | `sveltekitbook/Giscus.svelte` | Giscus comments mounted by props (`repo`, `repoId`, `category`, `categoryId`, `term`, `mode`). |
 | `sveltekitbook/PageMeta.svelte` | Drops Open Graph + Twitter Card tags into `<svelte:head>` so per-page URLs unfurl with a tldr in Slack/iMessage/Discord. Props: `title`, `description`, `url`, `siteName`, `image`, `imageAlt`, `type`, `twitterCard`. |
