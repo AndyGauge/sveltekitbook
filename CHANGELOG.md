@@ -6,6 +6,15 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- `md()` and `mdBlock()` now render backtick code spans —
+  `` `code` `` becomes `<code>code</code>`. Code spans are pulled
+  out to placeholders before other transforms run, so their
+  contents render literally (CommonMark behavior — `` `**not
+  bold**` `` stays as `**not bold**` inside `<code>`, links and
+  glossary syntax inside backticks are left alone). HTML chars
+  inside code spans are still escaped.
+
 ## [0.3.0] — 2026-05-01
 
 ### Added
