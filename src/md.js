@@ -1,11 +1,15 @@
 // Inline markdown for trusted (hardcoded) text.
+//   `code`         → <code>
 //   **bold**       → <strong>
 //   *em*           → <em>
 //   [text](url)    → <a href="url">text</a>  (http/https/mailto/relative only)
 //   [[term]]       → <a href="{glossaryBase}#term-slug">term</a>  (when glossary is enabled)
 //
-// Order matters: bold/em first, then external links, then glossary linking,
-// so that hrefs aren't escaped and `[[term]]` can't collide with `[t](u)`.
+// Order matters: code spans are pulled out to placeholders first so their
+// contents don't get re-processed (CommonMark — code spans are literal),
+// then bold/em, then external links, then glossary linking, so hrefs aren't
+// escaped and `[[term]]` can't collide with `[t](u)`. Code spans are
+// substituted back at the end wrapped in `<code>`.
 
 const ESCAPE = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 const escape = (s) => String(s).replace(/[&<>"']/g, (c) => ESCAPE[c]);
@@ -31,7 +35,13 @@ export function md(text, opts = {}) {
   const glossary = opts.glossary;
   const glossaryBase = opts.glossaryBase ?? '/glossary';
 
-  let out = escape(text)
+  const codeSpans = [];
+  let out = escape(text).replace(/`([^`]+)`/g, (_, content) => {
+    codeSpans.push(content);
+    return `\x00CODE${codeSpans.length - 1}\x00`;
+  });
+
+  out = out
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>');
 
@@ -60,6 +70,8 @@ export function md(text, opts = {}) {
     // Strip [[ ]] if no glossary so the syntax never leaks through.
     out = out.replace(/\[\[([^\]]+)\]\]/g, '$1');
   }
+
+  out = out.replace(/\x00CODE(\d+)\x00/g, (_, i) => `<code>${codeSpans[+i]}</code>`);
 
   return out;
 }
