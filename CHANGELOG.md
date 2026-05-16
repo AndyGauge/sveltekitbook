@@ -6,6 +6,18 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.4.1] — 2026-05-16
+
+### Fixed
+- `createPager` no longer hijacks wheel/touch gestures that originate
+  inside a horizontally-scrollable element (a wide code block, an
+  embedded table). Previously, shift-wheeling or trackpad-swiping
+  inside a `<pre>` with `overflow-x: auto` would turn the page
+  instead of scrolling the block. The pager now walks up from the
+  event target and bails out when it finds an ancestor whose
+  `scrollWidth > clientWidth` and whose computed `overflow-x` is
+  `auto` or `scroll`, leaving the browser's native scroll alone.
+
 ## [0.4.0] — 2026-05-02
 
 ### Added

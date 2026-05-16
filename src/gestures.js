@@ -2,7 +2,10 @@
  * Wheel + touch-drag → discrete page navigation.
  *
  * Vertical scroll/swipe is reserved for scrolling the current page's content.
- * Only horizontal gestures turn pages.
+ * Only horizontal gestures turn pages — EXCEPT when the gesture originates
+ * inside an element that can itself scroll horizontally (a wide code block,
+ * an embedded table). In that case the browser's native scroll wins and the
+ * pager stays out of the way.
  */
 
 const WHEEL_THRESHOLD = 140;
@@ -10,6 +13,21 @@ const TOUCH_THRESHOLD = 70;
 const DRAG_MAX = 260;
 const COOLDOWN = 750;
 const WHEEL_RESET_MS = 220;
+
+function isInHorizontalScroller(target, container) {
+  if (!(target instanceof Element)) return false;
+  let node = target;
+  while (node && node !== container) {
+    if (node.scrollWidth > node.clientWidth) {
+      const style = getComputedStyle(node);
+      if (style.overflowX === 'auto' || style.overflowX === 'scroll') {
+        return true;
+      }
+    }
+    node = node.parentElement;
+  }
+  return false;
+}
 
 export function createPager({ onNext, onPrev, setOffset }) {
   let lastNav = 0;
@@ -48,6 +66,11 @@ export function createPager({ onNext, onPrev, setOffset }) {
       return;
     }
 
+    if (isInHorizontalScroller(e.target, e.currentTarget)) {
+      wheelAccum = 0;
+      return;
+    }
+
     e.preventDefault?.();
     wheelAccum += dx;
 
@@ -71,7 +94,7 @@ export function createPager({ onNext, onPrev, setOffset }) {
     touchStartY = t.clientY;
     touchCurrentX = touchStartX;
     touchCurrentY = touchStartY;
-    dragging = true;
+    dragging = !isInHorizontalScroller(e.target, e.currentTarget);
     dragAxis = null;
   }
 
