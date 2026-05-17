@@ -6,6 +6,24 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-05-16
+
+### Added
+- `sveltekitbook/GlossaryPopover.svelte` — a hover/focus popover
+  component that explains glossary terms in place.  Place once in
+  the root layout, pass it the same `GLOSSARY` object you pass to
+  `md` / `mdBlock`, and every `<a class="hw-glossary-link" data-term=…>`
+  on the page becomes hoverable.  Renders the term name, optional
+  "see: …" cross-refs, the definition (rich markdown via `mdBlock`),
+  and an "Open in glossary →" link.  Keyboard accessible via
+  `focusin` / `focusout`; closes on `Escape` or scroll.  Hidden
+  on touch-only devices.
+- `md()` and `mdBlock()` now emit a `data-term="canonical-name"`
+  attribute on glossary links generated from `[[term]]` references.
+  The attribute is what `<GlossaryPopover>` reads to look up the
+  entry.  Books that don't use the popover are unaffected — the
+  attribute is harmless on its own.
+
 ## [0.4.1] — 2026-05-16
 
 ### Fixed

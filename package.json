@@ -1,6 +1,6 @@
 {
   "name": "sveltekitbook",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Runtime helpers for SvelteKit books scaffolded by create-sveltekitbook.",
   "type": "module",
   "author": "Andrew Gauger",
@@ -17,6 +17,7 @@
     "./md": "./src/md.js",
     "./palette": "./src/palette.js",
     "./Giscus.svelte": "./src/Giscus.svelte",
+    "./GlossaryPopover.svelte": "./src/GlossaryPopover.svelte",
     "./PageMeta.svelte": "./src/PageMeta.svelte"
   },
   "peerDependencies": {

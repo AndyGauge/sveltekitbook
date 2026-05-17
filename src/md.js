@@ -64,7 +64,12 @@ export function md(text, opts = {}) {
       const term = raw.trim();
       const canonical = lookup.get(term.toLowerCase());
       if (!canonical) return term; // unknown term → plain text, no broken link
-      return `<a class="hw-glossary-link" href="${glossaryBase}#${slug(canonical)}">${term}</a>`;
+      const dataTerm = canonical
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      return `<a class="hw-glossary-link" href="${glossaryBase}#${slug(canonical)}" data-term="${dataTerm}">${term}</a>`;
     });
   } else {
     // Strip [[ ]] if no glossary so the syntax never leaks through.
